@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+require "../../bin/mosaic_solver.rb"
+
+filename = ARGV[0] # The first argument is the filename with the input table string
+input_array = []
+File.open(filename) do |f|
+  string_input_table = f.read
+  input_array = string_input_table.split("\n").map{|row| row.split("|")[1..-1]}
+end
+
+solver = MosaicSolver.new
+output = solver.solve(input_array)
+
+puts output.collect {|row| "|" + row.join("|") + "|\n"}.join("")
+
